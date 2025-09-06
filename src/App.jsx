@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FaAngleDown } from "react-icons/fa";
-import Spline from "@splinetool/react-spline";
+// import Spline from "@splinetool/react-spline";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 // Import components
@@ -180,7 +180,7 @@ export default function App() {
               {/* Floating 3D Spline */}
               <div className="fixed bottom-0 right-0 z-50 pointer-events-none">
                 <div className="h-50 w-50">
-                  <Spline scene="https://prod.spline.design/NfwNxDSgByBL4GgB/scene.splinecode" />
+{/*                   <Spline scene="https://prod.spline.design/NfwNxDSgByBL4GgB/scene.splinecode" /> */}
                 </div>
               </div>
             </div>
