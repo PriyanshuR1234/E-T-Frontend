@@ -2,11 +2,11 @@ import React from "react";
 import { FaLinkedin, FaFacebook, FaGithub } from "react-icons/fa";
 
 const teamMembers = [
-  { name: "Sahil Gulati", img: "/Sahil.png", role: "Frontend Developer" },
-  { name: "Divya Singhal", img: "/Divya.png", role: "UI/UX Designer" },
-  { name: "Priyanshu Rajput", img: "/Priyanshu.jpg", role: "AI & ML Expert" },
+  { name: "Sahil Gulati", img: "/Sahil.jpg", role: "Full Stack Developer" },
+  { name: "Divya Singhal", img: "/Divya.png", role: "IoT and Sensors Expert" },
+  { name: "Priyanshu Rajput", img: "/Priyanshu.jpg", role: "Full Stack Developer" },
   { name: "Pragati Tomar", img: "/Pragati.png", role: "Backend Developer" },
-  { name: "Himanshu", img: "/Himanshu.png", role: "Full Stack Developer" },
+  { name: "Himanshu", img: "/Himanshu.png", role: "AI & ML Expert" },
   { name: "Srishti", img: "/Srishti.png", role: "Software Engineer" },
 ];
 
