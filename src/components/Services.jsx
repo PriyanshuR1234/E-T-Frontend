@@ -24,10 +24,13 @@ const Services = () => {
     <section
       id="services"
       className="relative py-24 flex flex-col items-center text-center text-gray-900 overflow-hidden"
+      style={{
+        backgroundImage: "url('/Services.jpeg')", // 🔑 Your static bg image
+        backgroundAttachment: "fixed",           // 🔑 Keeps it static
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
     >
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-sky-50 via-white to-sky-100"></div>
-
       <div className="relative z-10 max-w-6xl mx-auto px-6">
         {/* Title */}
         <h2 className="text-5xl font-extrabold mb-16 text-sky-600 drop-shadow-md">

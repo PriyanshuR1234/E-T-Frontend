@@ -6,9 +6,11 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 // Import components
 import About from "./components/About";
-import WhatWeDo from "./components/WhatWeDo";
-import Contact from "./components/Contact";
+import WhatWeDo from "./components/Features";
+import Contact from "./components/Team";
 import Services from "./components/Services";
+import ContactInfo from "./components/ContactInfo";
+import Footer from "./components/footer"; 
 import NewPage from "./pages/NewPage"; // ✅ import new page
 
 export default function App() {
@@ -66,7 +68,7 @@ export default function App() {
                 className="relative h-screen flex items-center justify-center text-center bg-black"
               >
                 <img
-                  src="/IntroBG.jpg"
+                  src="/IntroBG.png"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
                 <div className="relative z-10 px-4">
@@ -134,6 +136,8 @@ export default function App() {
               <WhatWeDo />
               <Services />
               <Contact />
+              <ContactInfo />
+                <Footer /> 
 
               {/* ✅ Mac Dock Navbar */}
               <div className="fixed bottom-4 sm:bottom-6 left-1/2 transform -translate-x-1/2 z-50">
