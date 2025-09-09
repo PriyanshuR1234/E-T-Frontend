@@ -41,7 +41,9 @@ const NewPage = () => {
 
         {/* Form */}
         <form
-          onSubmit={handleSubmit}
+          // onSubmit={handleSubmit} 
+          action="http://localhost:3000/submit"
+          method='Get'
           className="bg-white/40 rounded-2xl shadow-xl p-10 flex flex-col gap-6"
         >
           {/* Sensor Inputs */}
@@ -159,7 +161,7 @@ const NewPage = () => {
 
           {/* Submit Button */}
           <button
-            type="submit"
+            // type="submit"
             className="mt-6 bg-sky-600 text-white text-lg font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-sky-700 transition"
           >
             Analyze
