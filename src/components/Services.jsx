@@ -25,7 +25,7 @@ const Services = () => {
       id="services"
       className="relative py-24 flex flex-col items-center text-center text-gray-900 overflow-hidden"
       style={{
-        backgroundImage: "url('/Services.jpeg')", // 🔑 Your static bg image
+        backgroundImage: "linear-gradient(rgba(255, 255, 255, 0.5),rgba(255, 255, 255, 0.5)), url('/Services.jpeg')", // 🔑 Your static bg image
         backgroundAttachment: "fixed",           // 🔑 Keeps it static
         backgroundSize: "cover",
         backgroundPosition: "center",

@@ -1,3 +1,4 @@
+import { rgba } from "framer-motion";
 import React from "react";
 import { FaMapMarkerAlt, FaPhone, FaEnvelope } from "react-icons/fa";
 
@@ -7,10 +8,11 @@ const ContactInfo = () => {
       id="contact"
       className="relative min-h-screen flex items-center justify-center text-black "
       style={{
-        backgroundImage: "url('/contact.jpeg')", // your background image
+        backgroundImage: "linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('/contact.jpeg')", // your background image
         backgroundSize: "cover",
         backgroundPosition: "center",
-        backgroundAttachment: "fixed", // makes it static
+        backgroundAttachment: "fixed", 
+        // makes it static
       }}
     >
       <div className="relative z-10 max-w-6xl w-full grid md:grid-cols-2 gap-12 px-6 py-16 ">

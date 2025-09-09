@@ -140,7 +140,7 @@ export default function App() {
                 <Footer /> 
 
               {/* ✅ Mac Dock Navbar */}
-              <div className="fixed bottom-4 sm:bottom-6 left-1/2 transform -translate-x-1/2 z-50">
+              <div className="fixed bottom-4 sm:bottom-2 left-1/2 transform -translate-x-1/2 z-50">
                 <motion.div
                   animate={{
                     scale: hoverIndex !== null ? 1.05 : 1,

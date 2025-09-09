@@ -14,7 +14,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="relative py-24 text-center bg-gradient-to-b from-sky-50 to-white h-auto"
+      className="relative py-24 text-center bg-gradient-to-b from-sky-100 to-white h-auto"
     >
       <div className="max-w-6xl mx-auto px-6">
         {/* Our Team Section */}
