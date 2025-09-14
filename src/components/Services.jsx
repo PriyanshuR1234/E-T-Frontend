@@ -11,12 +11,14 @@ const Services = () => {
       title: "Herbal Testing",
       description: "Advanced tools to evaluate herbal quality with precision.",
       icon: "/home.png",
+      link: "/newpage", // 🔗 route for herbal testing
     },
     {
       id: 2,
-      title: "Smart Analysis",
+      title: "Calling Agent",
       description: "AI-driven insights to classify and validate herbal extracts.",
-      icon: "/start.png",
+      icon: "/bot.png",
+      link: "/callbot", // 🔗 route for call bot page
     },
   ];
 
@@ -25,8 +27,9 @@ const Services = () => {
       id="services"
       className="relative py-24 flex flex-col items-center text-center text-gray-900 overflow-hidden"
       style={{
-        backgroundImage: "linear-gradient(rgba(255, 255, 255, 0.5),rgba(255, 255, 255, 0.5)), url('/Services.jpeg')", // 🔑 Your static bg image
-        backgroundAttachment: "fixed",           // 🔑 Keeps it static
+        backgroundImage:
+          "linear-gradient(rgba(255, 255, 255, 0.5),rgba(255, 255, 255, 0.5)), url('/Services.jpeg')",
+        backgroundAttachment: "fixed",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -45,7 +48,7 @@ const Services = () => {
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.2, duration: 0.6, type: "spring" }}
-              onClick={() => navigate("/newpage")}
+              onClick={() => navigate(service.link)} // ✅ dynamic navigation
               className="cursor-pointer relative bg-white border border-sky-200 rounded-3xl p-10 shadow-lg hover:shadow-2xl hover:-translate-y-3 transform transition-all duration-300 flex flex-col items-center"
             >
               <div className="h-20 w-20 rounded-full bg-sky-100 flex items-center justify-center mb-6 shadow-inner">
