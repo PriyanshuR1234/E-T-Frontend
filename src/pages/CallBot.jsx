@@ -166,7 +166,7 @@ const CallBotPage = () => {
 
           {/* FOOTER */}
           <footer className="py-12 text-center bg-sky-900/80 backdrop-blur-xl z-10">
-            <p className="text-sky-100">© 2025 E-Tongue Call Assistant · Built with ❤️ and AI</p>
+            <p className="text-sky-100">© 2025 E-Tongue Call Assistant · Designed By 💙 HYPERLOOP</p>
           </footer>
         </>
       )}
