@@ -12,7 +12,7 @@ import Contact from "./components/Team";
 import Services from "./components/Services";
 import ContactInfo from "./components/ContactInfo";
 import Footer from "./components/footer"; 
-import NewPage from "./pages/NewPage"; 
+import NewPage from "./pages/NewPage"; //newpage imported here
 import CallBot from "./pages/CallBot"; // ✅ Import CallBot page
 
 export default function App() {
