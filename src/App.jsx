@@ -143,7 +143,106 @@ export default function App() {
               <Footer /> 
 
               {/* ✅ Mac Dock Navbar */}
-              {/* (your dock code stays same) */}
+              <div className="fixed bottom-4 sm:bottom-2 left-1/2 transform -translate-x-1/2 z-50">
+                <motion.div
+                  animate={{
+                    scale: hoverIndex !== null ? 1.05 : 1,
+                  }}
+                  transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                  className="flex items-end bg-white/80 backdrop-blur-md px-3 sm:px-6 py-2 sm:py-4 rounded-2xl shadow-2xl space-x-2 sm:space-x-4"
+                >
+                  {[
+                    {
+                      id: "home",
+                      label: "Home",
+                      icon: "/home.png",
+                      onClick: () => scrollToSection("hero"),
+                    },
+                    {
+                      id: "about",
+                      label: "About",
+                      icon: "/about.png",
+                      onClick: () => scrollToSection("about"),
+                    },
+                    {
+                      id: "what-we-do",
+                      label: "Features",
+                      icon: "/work.png",
+                      onClick: () => scrollToSection("what-we-do"),
+                    },
+                    {
+                      id: "services",
+                      label: "Services",
+                      icon: "/start.png",
+                      onClick: () => scrollToSection("services"),
+                    },
+                    {
+                      id: "contact",
+                      label: "Contact",
+                      icon: "/contact.png",
+                      onClick: () => scrollToSection("contact"),
+                    },
+                  ].map((item, index) => {
+                    // distance-based scaling like Mac dock
+                    const distance =
+                      hoverIndex === null ? 0 : Math.abs(index - hoverIndex);
+                    const scale =
+                      hoverIndex === null
+                        ? 1
+                        : Math.max(1, 1.35 - distance * 0.15);
+                    const lift =
+                      hoverIndex === index
+                        ? -18
+                        : hoverIndex !== null && distance === 1
+                        ? -8
+                        : 0;
+
+                    return (
+                      <div
+                        key={item.id}
+                        className="relative flex flex-col items-center"
+                        onMouseEnter={() => setHoverIndex(index)}
+                        onMouseLeave={() => setHoverIndex(null)}
+                      >
+                        {/* Tooltip above */}
+                        {hoverIndex === index && (
+                          <motion.span
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 10 }}
+                            transition={{
+                              type: "spring",
+                              stiffness: 250,
+                              damping: 20,
+                            }}
+                            className="absolute -top-8 sm:-top-10 text-[10px] sm:text-xs font-medium bg-gray-800 text-white px-2 py-1 rounded shadow-lg z-50"
+                          >
+                            {item.label}
+                          </motion.span>
+                        )}
+
+                        {/* Icon bubble */}
+                        <motion.div
+                          onClick={item.onClick}
+                          animate={{ scale, y: lift }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 300,
+                            damping: 20,
+                          }}
+                          className="h-10 w-10 sm:h-14 sm:w-14 rounded-full bg-gray-200 flex items-center justify-center shadow-md cursor-pointer"
+                        >
+                          <img
+                            src={item.icon}
+                            alt={item.label}
+                            className="h-6 w-6 sm:h-8 sm:w-8 object-contain"
+                          />
+                        </motion.div>
+                      </div>
+                    );
+                  })}
+                </motion.div>
+              </div>
 
               {/* Floating 3D Spline */}
               <div className="fixed bottom-0 right-0 z-40">
