@@ -6,7 +6,7 @@ const teamMembers = [
   {
     name: "Sahil Gulati",
     img: "/Sahil.jpg",
-    role: "Full Stack Developer",
+    role: "IoT & Full Stack Developer",
     linkedin: "https://www.linkedin.com/in/sahil-gulati-663708320/", 
     facebook: "#",
     github: "https://github.com/sahilgulati",
@@ -14,7 +14,7 @@ const teamMembers = [
   {
     name: "Divya Singhal",
     img: "/Divya.jpeg",
-    role: "IoT and Sensors Expert",
+    role: "IoT and App Developer",
     linkedin: "https://linkedin.com/in/divya-singhal-64b166278",
     facebook: "https://facebook.com/divya.singhal",
     github: "https://github.com/divyasinghal",
@@ -46,7 +46,7 @@ const teamMembers = [
   {
     name: "Srishti",
     img: "/Srishti.jpg",
-    role: "Software Engineer",
+    role: "AR/VR Developer",
     linkedin: "https://www.linkedin.com/in/srishti-ruhal-931193317/",
     facebook: "https://facebook.com/srishti",
     github: "https://github.com/srishti",

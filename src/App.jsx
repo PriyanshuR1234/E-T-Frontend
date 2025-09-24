@@ -4,7 +4,6 @@ import { FaAngleDown } from "react-icons/fa";
 import Spline from "@splinetool/react-spline";
 import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 
-
 // Import components
 import About from "./components/About";
 import WhatWeDo from "./components/Features";
@@ -12,8 +11,23 @@ import Contact from "./components/Team";
 import Services from "./components/Services";
 import ContactInfo from "./components/ContactInfo";
 import Footer from "./components/footer"; 
-import NewPage from "./pages/NewPage"; //newpage imported here
-import CallBot from "./pages/CallBot"; // ✅ Import CallBot page
+import NewPage from "./pages/NewPage";
+import CallBot from "./pages/CallBot"; 
+
+// ✅ FloatingSpline component (isolated useNavigate usage)
+function FloatingSpline() {
+  const navigate = useNavigate();
+  return (
+    <div className="fixed bottom-0 right-0 z-40">
+      <div
+        className="h-32 w-32 sm:h-50 sm:w-50 cursor-pointer"
+        onClick={() => navigate("/callbot")}
+      >
+        <Spline scene="https://prod.spline.design/NfwNxDSgByBL4GgB/scene.splinecode" />
+      </div>
+    </div>
+  );
+}
 
 export default function App() {
   const [activeSection, setActiveSection] = useState("hero");
@@ -42,25 +56,19 @@ export default function App() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Smooth scroll function
   const scrollToSection = (id) => {
     const section = document.getElementById(id);
     if (section) {
-      section.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
 
   return (
     <Router>
       <Routes>
-        {/* ✅ Pages */}
         <Route path="/newpage" element={<NewPage />} />
-        <Route path="/callbot" element={<CallBot />} />   {/* ✅ CallBot route */}
+        <Route path="/callbot" element={<CallBot />} />   
 
-        {/* ✅ Main Website */}
         <Route
           path="/"
           element={
@@ -78,24 +86,22 @@ export default function App() {
                   <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-black flex justify-center flex-wrap text-center">
                     Welcome to{" "}
                     <span className="text-sky-600 flex ml-2">
-                      {["E", "-", "T", "o", "n", "g", "u", "e"].map(
-                        (char, i) => (
-                          <motion.span
-                            key={i}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{
-                              delay: i * 0.2,
-                              type: "spring",
-                              stiffness: 200,
-                              damping: 20,
-                            }}
-                            className="inline-block"
-                          >
-                            {char}
-                          </motion.span>
-                        )
-                      )}
+                      {["E", "-", "T", "o", "n", "g", "u", "e"].map((char, i) => (
+                        <motion.span
+                          key={i}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{
+                            delay: i * 0.2,
+                            type: "spring",
+                            stiffness: 200,
+                            damping: 20,
+                          }}
+                          className="inline-block"
+                        >
+                          {char}
+                        </motion.span>
+                      ))}
                     </span>
                   </h1>
 
@@ -113,9 +119,7 @@ export default function App() {
                       onClick={() => scrollToSection("contact")}
                       className="px-6 py-3 bg-transparent border border-black rounded-2xl hover:bg-sky-800 hover:text-white transition w-full sm:w-auto"
                     >
-                      <div className="text-black hover:text-white">
-                        Contact Us
-                      </div>
+                      <div className="text-black hover:text-white">Contact Us</div>
                     </button>
                   </div>
                 </div>
@@ -134,7 +138,7 @@ export default function App() {
                 </div>
               </section>
 
-              {/* ✅ Sections */}
+              {/* Sections */}
               <About />
               <WhatWeDo />
               <Services />
@@ -142,14 +146,14 @@ export default function App() {
               <ContactInfo />
               <Footer /> 
 
-              {/* ✅ Mac Dock Navbar */}
+              {/* Dock Navbar */}
               <div className="fixed bottom-4 sm:bottom-2 left-1/2 transform -translate-x-1/2 z-50">
                 <motion.div
                   animate={{
                     scale: hoverIndex !== null ? 1.05 : 1,
                   }}
                   transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                  className="flex items-end bg-white/80 backdrop-blur-md px-3 sm:px-6 py-2 sm:py-4 rounded-2xl shadow-2xl space-x-2 sm:space-x-4"
+                  className="flex items-end bg-white/40 backdrop-blur-md px-3 sm:px-6 py-2 sm:py-4 rounded-2xl shadow-2xl space-x-2 sm:space-x-4"
                 >
                   {[
                     {
@@ -244,17 +248,9 @@ export default function App() {
                 </motion.div>
               </div>
 
-              {/* Floating 3D Spline */}
-              <div className="fixed bottom-0 right-0 z-40">
-                <div
-                  className="h-32 w-32 sm:h-50 sm:w-50 cursor-pointer"
-                  onClick={() => window.location.href = "/callbot"}  // ✅ navigate to CallBot
-                >
-                  <Spline scene="https://prod.spline.design/NfwNxDSgByBL4GgB/scene.splinecode" />
-                </div>
-              </div>
-
-            </div> 
+              {/* ✅ Floating 3D Spline (now works) */}
+              <FloatingSpline />
+            </div>
           }
         />
       </Routes>
