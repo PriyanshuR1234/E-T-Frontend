@@ -36,7 +36,7 @@ const teamMembers = [
     github: "https://github.com/pragatitomar",
   },
   {
-    name: "Himanshu",
+    name: "Himanshu Kumar",
     img: "/Himanshu.jpg",
     role: "AI & ML Expert",
     linkedin: "https://www.linkedin.com/in/himanshukumard/",
@@ -44,7 +44,7 @@ const teamMembers = [
     github: "https://github.com/himanshu",
   },
   {
-    name: "Srishti",
+    name: "Srishti Ruhal",
     img: "/Srishti.jpg",
     role: "AR/VR Developer",
     linkedin: "https://www.linkedin.com/in/srishti-ruhal-931193317/",
