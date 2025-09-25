@@ -18,7 +18,7 @@ const Footer = () => {
           {/* Project Title */}
           <h2 className="text-2xl md:text-3xl font-bold">E-Tongue Project</h2>
           <p className="text-sm md:text-base max-w-md">
-            Advancing <span className="font-semibold">Herbal Quality Assessment</span> 
+            Advancing <span className="font-semibold">Herbal Quality Assessment </span> 
             through Electronic Tongue Technology
           </p>
 
