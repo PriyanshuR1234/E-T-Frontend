@@ -22,7 +22,7 @@ const CallBotPage = () => {
 
     const fullNumber = `${countryCode}${phoneNumber}`;
     try {
-      const response = await fetch("https://e-tongue-b.onrender.com/make-outbound-call", {
+      const response = await fetch("http://localhost:3000/make-outbound-call", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ to: fullNumber }),

@@ -35,23 +35,23 @@ const NewPage = () => {
 };
 
 
-    try {
-      const res = await fetch("http://localhost:3000/analyze", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(mappedData),
-      });
+try {
+    // Change this URL
+    const res = await fetch("https://your-render-app.onrender.com/api/analyze", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(mappedData),
+    });
 
-      const data = await res.json();
-      setResult(data);
-    } catch (err) {
-      console.error("Error:", err);
-      setResult({ error: "Failed to fetch results" });
-    } finally {
-      setLoading(false);
-    }
-  };
-
+    const data = await res.json();
+    setResult(data);
+  } catch (err) {
+    console.error("Error:", err);
+    setResult({ error: "Failed to fetch results" });
+  } finally {
+    setLoading(false);
+  }
+};
   return (
     <section
       id="analysis"
