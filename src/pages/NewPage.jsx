@@ -37,7 +37,7 @@ const NewPage = () => {
 
 try {
     // Change this URL
-    const res = await fetch("https://your-render-app.onrender.com/api/analyze", {
+    const res = await fetch("https://e-tongue-b.onrender.com/api/analyze", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(mappedData),
