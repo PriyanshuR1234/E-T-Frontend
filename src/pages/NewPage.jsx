@@ -23,35 +23,44 @@ const NewPage = () => {
     setLoading(true);
     setResult(null);
 
-    // Map frontend RGB keys to Python model keys (r, g, b)
     const mappedData = {
-  ph: parseFloat(formData.ph),
-  tds: parseFloat(formData.tds),
-  orp: parseFloat(formData.orp),
-  color_r: parseFloat(formData.color_r), // keep original keys
-  color_g: parseFloat(formData.color_g),
-  color_b: parseFloat(formData.color_b),
-  bme688: parseFloat(formData.bme688),
-};
+      ph: parseFloat(formData.ph),
+      tds: parseFloat(formData.tds),
+      orp: parseFloat(formData.orp),
+      color_r: parseFloat(formData.color_r),
+      color_g: parseFloat(formData.color_g),
+      color_b: parseFloat(formData.color_b),
+      bme688: parseFloat(formData.bme688),
+    };
 
+    try {
+      const res = await fetch("http://localhost:3000/api/analyze", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(mappedData),
+      });
 
-try {
-    // Change this URL
-    const res = await fetch("https://e-tongue-b.onrender.com/api/analyze", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(mappedData),
-    });
+      const data = await res.json();
 
-    const data = await res.json();
-    setResult(data);
-  } catch (err) {
-    console.error("Error:", err);
-    setResult({ error: "Failed to fetch results" });
-  } finally {
-    setLoading(false);
-  }
-};
+      // Ensure fallback values for blank data
+      setResult({
+        predicted_product: data.predicted_product || "N/A",
+        overall_match: data.overall_match ?? 0,
+        overall_impurity: data.overall_impurity ?? 0,
+        sensor_matches: data.sensor_matches || {},
+        taste_profile: data.taste_profile || {},
+        standard_profile: data.standard_profile || {},
+        charts: data.charts || {},
+        note: data.note || "No expert note available.",
+      });
+    } catch (err) {
+      console.error("Error fetching analysis:", err);
+      setResult({ error: "Failed to fetch results" });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section
       id="analysis"
@@ -140,129 +149,120 @@ try {
           </button>
         </form>
 
-{/* Results */}
-{result && (
-  <div className="mt-10 bg-white/60 rounded-xl shadow-md p-6">
-    {result.error ? (
-      <p className="text-red-600">{result.error}</p>
-    ) : (
-      <>
-        <h3 className="text-2xl font-bold text-sky-700 mb-4">
-          Analysis Results
-        </h3>
+        {/* Results */}
+        {result && (
+          <div className="mt-10 bg-white/60 rounded-xl shadow-md p-6">
+            {result.error ? (
+              <p className="text-red-600">{result.error}</p>
+            ) : (
+              <>
+                <h3 className="text-2xl font-bold text-sky-700 mb-4">
+                  Analysis Results
+                </h3>
 
-        {/* Input values */}
-        <h4 className="font-semibold mb-2">Input Values:</h4>
-        <div className="grid grid-cols-2 gap-4 mb-4">
-          {Object.entries(formData).map(([key, value]) => (
-            <div key={key} className="flex justify-between border-b py-1">
-              <span className="font-medium">{key.toUpperCase()}</span>
-              <span>{value}</span>
-            </div>
-          ))}
-        </div>
+                {/* Input Values */}
+                <h4 className="font-semibold mb-2">Input Values:</h4>
+                <div className="grid grid-cols-2 gap-4 mb-4">
+                  {Object.entries(formData).map(([key, value]) => (
+                    <div key={key} className="flex justify-between border-b py-1">
+                      <span className="font-medium">{key.toUpperCase()}</span>
+                      <span>{value}</span>
+                    </div>
+                  ))}
+                </div>
 
-        {/* Predicted standard profile */}
-        <h4 className="mt-4 font-semibold mb-2">Predicted Product Values:</h4>
-        <div className="grid grid-cols-2 gap-4 mb-4">
-          {result.standard_profile &&
-            Object.entries(result.standard_profile).map(([key, value]) => (
-              <div key={key} className="flex justify-between border-b py-1">
-                <span className="font-medium">{key}</span>
-                <span>{value}</span>
-              </div>
-            ))}
-        </div>
+                {/* Predicted Standard Profile */}
+                <h4 className="mt-4 font-semibold mb-2">
+                  Predicted Product Values:
+                </h4>
+                <div className="grid grid-cols-2 gap-4 mb-4">
+                  {result.standard_profile &&
+                    Object.entries(result.standard_profile).map(([key, value]) => (
+                      <div key={key} className="flex justify-between border-b py-1">
+                        <span className="font-medium">{key}</span>
+                        <span>{value}</span>
+                      </div>
+                    ))}
+                </div>
 
-        <p className="mb-4">
-          <strong>Predicted Product:</strong> {result.predicted_medicine}
-        </p>
-        <p className="mb-4">
-          <strong>Overall Match:</strong> {result.overall_match}%
-        </p>
-        <p className="mb-4">
-          <strong>Overall Impurity:</strong> {result.overall_impurity}%
-        </p>
+                <p className="mb-4">
+                  <strong>Predicted Product:</strong> {result.predicted_product}
+                </p>
+                <p className="mb-4">
+                  <strong>Overall Match:</strong> {result.overall_match}%
+                </p>
+                <p className="mb-4">
+                  <strong>Overall Impurity:</strong> {result.overall_impurity}%
+                </p>
 
-        {/* Sensor match percentages */}
-        <h4 className="mt-4 font-semibold mb-2">Sensor Match Percentages:</h4>
-        <ul className="list-disc pl-6 mb-4">
-          {result.sensor_matches &&
-            Object.entries(result.sensor_matches).map(([k, v]) => (
-              <li key={k}>
-                {k}: {v}%
-              </li>
-            ))}
-        </ul>
+                {/* Sensor Match Percentages */}
+                <h4 className="mt-4 font-semibold mb-2">Sensor Match Percentages:</h4>
+                <ul className="list-disc pl-6 mb-4">
+                  {result.sensor_matches &&
+                    Object.entries(result.sensor_matches).map(([k, v]) => (
+                      <li key={k}>
+                        {k}: {v}%
+                      </li>
+                    ))}
+                </ul>
 
-        {/* Taste profile percentages */}
-        <h4 className="mt-4 font-semibold mb-2">Taste Profile Percentages:</h4>
-        <ul className="list-disc pl-6 mb-4">
-          {result.taste_profile &&
-            Object.entries(result.taste_profile).map(([k, v]) => (
-              <li key={k}>
-                {k}: {v}%
-              </li>
-            ))}
-        </ul>
+                {/* Taste Profile Percentages */}
+                <h4 className="mt-4 font-semibold mb-2">Taste Profile Percentages:</h4>
+                <ul className="list-disc pl-6 mb-4">
+                  {result.taste_profile &&
+                    Object.entries(result.taste_profile).map(([k, v]) => (
+                      <li key={k}>
+                        {k}: {v}%
+                      </li>
+                    ))}
+                </ul>
 
-        {/* Charts */}
-        {result.charts && (
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-            {Object.entries(result.charts).map(([name, img_b64]) => (
-              <img
-                key={name}
-                src={`data:image/png;base64,${img_b64}`}
-                alt={name}
-                className="rounded shadow"
-              />
-            ))}
+                {/* Charts */}
+                {result.charts && (
+                  <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {Object.entries(result.charts).map(([name, img_b64]) => (
+                      <img
+                        key={name}
+                        src={`data:image/png;base64,${img_b64}`}
+                        alt={name}
+                        className="rounded shadow"
+                      />
+                    ))}
+                  </div>
+                )}
+
+                {/* Expert Note */}
+                {result.note && (
+                  <div className="mt-6 bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-lg">
+                    <h4 className="font-bold text-yellow-700 text-xl mb-4">Expert Note</h4>
+                    {result.note.split("\n").map((line, idx) => {
+                      const trimmed = line.trim();
+                      if (!trimmed) return null;
+
+                      if (trimmed.includes(":")) {
+                        const [subheading, ...rest] = trimmed.split(":");
+                        return (
+                          <div key={idx} className="mb-3">
+                            <h5 className="font-semibold text-yellow-800 text-lg flex items-start">
+                              <span className="mr-2 text-yellow-700">•</span> {subheading}
+                            </h5>
+                            <p className="text-gray-800 leading-relaxed">{rest.join(":").trim()}</p>
+                          </div>
+                        );
+                      } else {
+                        return (
+                          <p key={idx} className="text-gray-800 mb-2 leading-relaxed">
+                            {trimmed}
+                          </p>
+                        );
+                      }
+                    })}
+                  </div>
+                )}
+              </>
+            )}
           </div>
         )}
-
-        {/* Gemini Note */}
-{result.note && (
-  <div className="mt-6 bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-lg">
-    <h4 className="font-bold text-yellow-700 text-xl mb-4">Expert Note</h4>
-    {result.note
-      .split("\n")
-      .map((line, idx) => {
-        let trimmed = line.trim();
-        if (!trimmed) return null;
-
-        // Remove any double stars and replace with hash
-        trimmed = trimmed.replace(/\*\*/g, "#");
-
-        // Check if line contains a colon → treat as subheading
-        if (trimmed.includes(":")) {
-          const [subheading, ...rest] = trimmed.split(":");
-          const content = rest.join(":").trim();
-
-          return (
-            <div key={idx} className="mb-3">
-              <h5 className="font-semibold text-yellow-800 text-lg flex items-start">
-                <span className="mr-2 text-yellow-700">•</span> {subheading}
-              </h5>
-              <p className="text-gray-800 leading-relaxed">{content}</p>
-            </div>
-          );
-        } else {
-          // normal paragraph if no colon
-          return (
-            <p key={idx} className="text-gray-800 mb-2 leading-relaxed">
-              {trimmed}
-            </p>
-          );
-        }
-      })}
-  </div>
-)}
-
-      </>
-    )}
-  </div>
-)}
-
       </div>
     </section>
   );
